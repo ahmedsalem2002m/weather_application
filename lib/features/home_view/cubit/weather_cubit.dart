@@ -7,14 +7,15 @@ import '../data/repo/weather_repo.dart';
 class WeatherCubit extends Cubit<WeatherState> {
   WeatherCubit():super(WeatherInitialState());
   final WeatherRepo weatherRepo = WeatherRepo();
+   WeatherModel? weatherModel;
 
   getWeather({required String cityName}) async {
     try {
        emit(WeatherLoadedState());
-      WeatherModel? weatherModel = await weatherRepo.getWeatherResponse(
+       weatherModel = await weatherRepo.getWeatherResponse(
         cityName: cityName,
       );
-      emit(WeatherSuccessState(weatherModel: weatherModel));
+      emit(WeatherSuccessState());
     } catch (e) {
       emit(WeatherFailureState(error: e.toString()));
     }

@@ -5,7 +5,6 @@ import 'package:weather_application/features/home_view/views/widgets/no_body_wea
 import 'package:weather_application/features/home_view/views/widgets/weather_info.dart';
 import 'package:weather_application/features/search_view/views/search_view.dart';
 
-import '../../../main.dart';
 import '../cubit/weather_states.dart';
 
 class HomeView extends StatelessWidget {
@@ -29,7 +28,6 @@ class HomeView extends StatelessWidget {
           ),
         ],
         title: Text("Weather App"),
-        backgroundColor: Colors.blue,
       ),
       body: BlocBuilder<WeatherCubit, WeatherState>(
         builder: (context, state) {
@@ -38,7 +36,7 @@ class HomeView extends StatelessWidget {
           } else if (state is WeatherLoadedState) {
             return Center(child: CircularProgressIndicator());
           } else if (state is WeatherSuccessState) {
-            return WeatherInfo(weatherModel: state.weatherModel,);
+            return WeatherInfo();
           } else {
             return Text("opps there was an error");
           }
